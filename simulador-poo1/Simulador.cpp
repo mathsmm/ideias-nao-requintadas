@@ -2,20 +2,19 @@
  * \file   Simulador.cpp
  * \brief  
  * 
- * \author Matheus Marchi Moro
+ * \author ?
  * \date   October 2022
  *********************************************************************/
 
-//Este arquivo contém a função 'main'. A execução do programa começa e termina nesta função.
+// Este arquivo contém a função 'main'. A execução do programa começa e termina nesta função.
 
-#include <SDL.h>
 #include "App.h"
 
 int main(int argc, char* argv[]) 
 {
     App app;
 
-    return app.OnExecute();
+    return app.Execute();
 }
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração

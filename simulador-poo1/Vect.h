@@ -2,7 +2,6 @@
  * \file   Vect.h
  * \brief  
  * 
- * \author Matheus Marchi Moro
  * \date   October 2022
  *********************************************************************/
 
@@ -11,37 +10,84 @@ class Vect
 /** Vetor. Utiliza-se para representar e calcular grandezas vetoriais. */
 {
 	private:
-		// Vetores são denotados por coordenadas. No caso desta aplica-
-		// ção, dispõe-se de vetores bidimensionais (duas coordenadas).
+		// Coordenada x.
 		double x;
+
+		// Coordenada y.
 		double y;
 
 	public:
-		Vect(double coordX, double coordY)
+		// Construtor vazio.
+		Vect();
+
 		/**
-		 * Inicializa um vetor a partir de uma coordenada X e uma coordenada Y.
+		 * Construtor. Inicializa um vetor a partir de uma 
+		 * coordenada X e uma coordenada Y.
 		 *
 		 * \param coordX Coordenada X;
 		 * \param coordY Coordenada Y.
 		 */
-		{
-			this->x = coordX;
-			this->y = coordY;
-		}
+		Vect(double coordX, double coordY);
 
-		Vect(double firstX, double firstY, double lastX, double lastY)
 		/**
-		 * Inicializa um vetor a partir das coordenadas de dois pontos
-		 * Vect(AB) = B - A.
-		 * 
-		 * \param firstX Coordenada X do primeiro ponto;
-		 * \param firstY Coordenada Y do primeiro ponto;
-		 * \param lastX Coordenada X do último ponto;
-		 * \param lastY Coordenada Y do último ponto.
+		 * Construtor. Inicializa um vetor a partir 
+		 * de outros dois vetores.
+		 *
+		 * \param firstCoords Vetor inicial
+		 * \param lastCoords Vetor final
 		 */
-		{
-			this->x = lastX - firstX;
-			this->y = lastY - firstY;
-		}
-};
+		Vect(Vect first, Vect last);
 
+		Vect operator+ (const Vect& v) const
+		{
+			return Vect(x + v.x, y + v.y);
+		}
+
+		Vect operator- (const Vect& v)
+		{
+			return Vect(x - v.x, y - v.y);
+		}
+
+		double operator* (const Vect& v)
+		/** Produto escalar */
+		{
+			return x * v.x + y * v.y;
+		}
+
+		Vect operator* (const double& value)
+		{
+			return Vect(x * value, y * value);
+		}
+
+		Vect operator/ (const double& value)
+		{
+			return Vect(x / value, y / value);
+		}
+
+		double get_x();
+		double get_y();
+
+		// \return Vetor unitário
+		Vect unitVect();
+
+		/** \return Módulo do vetor */
+		double Module();
+
+		/** \return Seno do argumento do vetor */
+		double VSin();
+
+		/** \return Cosseno do argumento do vetor */
+		double VCos();
+
+		/** \return Argumento do vetor */
+		double Argument();
+
+		/**
+		 * Altera as coordenadas do vetor de modo
+		 * a incrementar seu argumento.
+		 * 
+		 * \param radInc Incremento em radianos
+		 * \return void
+		 */
+		void IncArgument(double radInc);
+};

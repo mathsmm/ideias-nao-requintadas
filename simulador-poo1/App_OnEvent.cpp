@@ -1,25 +1,17 @@
-/*****************************************************************//**
- * \file   App_OnEvent.cpp
- * \brief  
- * 
- * \author Matheus Marchi Moro
- * \date   October 2022
- *********************************************************************/
-
 #include "App.h"
 
 void App::OnEvent(SDL_Event event) 
-/** Trata eventos do SDL */
 {
+	// Tipo de evento
 	switch (event.type) 
 	{
-		//Tecla pressionada
+		// Tecla pressionada
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym) 
 			{
-				//Escape (Esc)
+				// Escape (Esc)
 				case SDLK_ESCAPE:
-					Running = false;
+					running = false;
 					break;
 
 				default: break;
@@ -27,7 +19,7 @@ void App::OnEvent(SDL_Event event)
 			break;
 
 		case SDL_QUIT:
-			Running = false;
+			running = false;
 			break;
 
 		default: break;

@@ -1,31 +1,44 @@
-/*****************************************************************//**
- * \file   Body.h
- * \brief  
- * 
- * \author Matheus Marchi Moro
- * \date   October 2022
- *********************************************************************/
-
 #pragma once
 #include "Vect.h"
 class Body
-/** Corpo que é simulado no programa */
 {
 	protected:
-		// Área, massa, posição e velocidade
-		double area;
-		double mass;
-		//double density;
+		// Vetor de posição
 		Vect position;
-		Vect speed;
+
+		// Vetor de velocidade
+		Vect velocity;
+
 		//Vect acceleration;
 
+		// Área
+		double area;
+
+		// Massa
+		double mass;
+
+		//double density;
+
 	public:
+		// Construtor padrão.
 		Body();
+
+		/**
+		 * Construtor. Inicializa uma partícula.
+		 *
+		 * \param initialPosition Vetor de posição inicial
+		 * \param initalVelocity Vetor de velocidade inicial
+		 * \param area Área
+		 */
+		Body(Vect initialPosition, Vect initalVelocity, double area);
+
+		Vect get_pos();
+		void set_pos(Vect pos);
+
+		Vect get_vel();
+		void set_vel(Vect newVel);
 
 		double get_area();
 		double get_mass();
-		Vect   get_pos();
-		Vect   get_speed();
 };
 

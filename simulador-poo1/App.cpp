@@ -1,53 +1,43 @@
-/*****************************************************************//**
- * \file   App.cpp
- * \brief  
- * 
- * \author Matheus Marchi Moro
- * \date   October 2022
- *********************************************************************/
-
 #include "App.h"
+#include <string.h>
 
-App::App() 
+App::App():
+	global{},
+	window{ NULL },
+	renderer{ NULL },
+	running{ true }
+{}
+
+int App::Execute()
 {
-	Global = new AppVar(60, 640, 480);
-	Window = NULL;
-	Renderer = NULL;
-	Main_Surface = NULL;
-	Running = true;
-}
+	OnInit();
 
-int App::OnExecute() 
-/**
- * Inicializa o SDL, variáveis de App e loop do simulador.
- *
- * \return -1 caso o SDL não seja inicializado e 0 ao término da execução.
- */
-{
-	
+	OnBeforeLoop();
 
-	// Inicia o SDL e retorna true caso haja sucesso
-	if (OnInit() == false) 
-	{
-		return -1;
-	}
-
-	// Estrutura que contém informações sobre eventos
+	// Estrutura que contÃ©m informaÃ§Ãµes sobre eventos
 	SDL_Event event;
 
-	// Laço de repetição do simulador
-	while (Running) 
+	// LaÃ§o de repetiÃ§Ã£o do simulador
+	while (running) 
 	{
+		// Ticks atuais da execuÃ§Ã£o do SDL. Ã‰ utilizado em OnTimeDelay
+		global.set_ticks(SDL_GetTicks());
+
 		// Checa por eventos e os percorre um por vez a partir de uma fila.
-		// A fila é preenchida por eventos toda vez que o SDL detecta um input.
-	    // Lista de eventos : https://wiki.libsdl.org/SDL_Event#data_fields.
+		// A fila Ã© preenchida por eventos toda vez que o SDL detecta um input.
+		// Lista de eventos : https://wiki.libsdl.org/SDL_Event#data_fields.
 		while (SDL_PollEvent(&event)) 
 		{
 			OnEvent(event);
 		}
 
-		OnLoop();
-		OnRender();
+		OnRenderClear();
+
+		OnLoopThroughParticles();
+
+		OnRenderPresent();
+
+		OnTimeDelay();
 	}
 
 	OnCleanup();

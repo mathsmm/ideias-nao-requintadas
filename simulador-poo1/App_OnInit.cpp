@@ -1,46 +1,35 @@
-/*****************************************************************//**
- * \file   App_OnInit.cpp
- * \brief  
- * 
- * \author Matheus Marchi Moro
- * \date   October 2022
- *********************************************************************/
-
 #include "App.h"
 
-bool App::OnInit() 
-/**
- * Inicia funcionalidades do SDL e propriedades de App.
- * 
- * \return true caso haja sucesso, false caso n�o haja.
- */
+void App::OnInit()
 {
+	global = AppVar(60, 800, 600, 24, LoadFromArchive("particulas.txt"));
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) 
 	{
-		return false;
+		SDL_Log("SDL não pôde ser inicializado: ", SDL_GetError());
+		exit(1);
 	}
 
-	Window = SDL_CreateWindow(
+	window = SDL_CreateWindow(
 		"Simulador",
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
-		Global->get_Width(), 
-		Global->get_Heigth(),
+		global.get_width(),
+		global.get_heigth(),
 		SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
 	);
 
-	Renderer = SDL_CreateRenderer(Window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	Main_Surface = SDL_GetWindowSurface(Window);
-
-	if (
-		Window       == NULL ||
-		Renderer     == NULL ||
-		Main_Surface == NULL
-		) 
+	if (window == NULL) 
 	{
-		return false;
+		SDL_Log("A janela SDL está com valor nulo. Erro: ", SDL_GetError());
+		exit(1);
 	}
 
-	return true;
+	if (renderer == NULL)
+	{
+		SDL_Log("O renderizador SDL está com valor nulo. Erro: ", SDL_GetError());
+		exit(1);
+	}
 }
