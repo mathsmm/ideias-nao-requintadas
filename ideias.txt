@@ -1,0 +1,9 @@
+melhorar algoritmo do repositório py-hamming (refatorar e compilar 
+com Codon ou reescrever em Rust)
+
+melhorar o simulador feito em c++ reescrevendo-o em Rust e 
+adicionando funcionalidades
+
+implementar tree traversal em rust
+implementar avaliação de fórmulas com operadores também
+implementar tableaux semântico
