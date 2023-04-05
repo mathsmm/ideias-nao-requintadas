@@ -70,17 +70,31 @@ void ListaDupla::insere(int v) {
 void ListaDupla::imprime() {
     NoListaDupla *no_atual = prim;
     
-    while (no_atual->prox != NULL) {
+    while (no_atual != NULL) {
         std::cout << no_atual->info << std::endl;
         no_atual = no_atual->prox;
     }
 }
 
 
-// ListaDupla::bool vazia();
+bool ListaDupla::vazia() {
+    return (prim == NULL);
+}
 
 
-// ListaDupla::NoListaDupla *busca(int v);
+NoListaDupla* ListaDupla::busca(int v) {
+    NoListaDupla *no_atual = prim;
+    
+    while (no_atual->info != v) {
+        no_atual = no_atual->prox;
+        
+        if (no_atual == NULL) {
+            return NULL;
+        }
+    }
+    
+    return no_atual;
+}
 
 
 // ListaDupla::int comprimento();
